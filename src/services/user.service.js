@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const httpStatus = require('http-status');
 const { User } = require('../models');
 const ApiError = require('../utils/ApiError');
@@ -9,7 +10,10 @@ const ApiError = require('../utils/ApiError');
  */
 const createUser = async (userBody) => {
   if (await User.isEmailTaken(userBody.email)) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Email already registered');
+  }
+  if (await User.isPhoneTaken(userBody.phone)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Phone already registered');
   }
   const user = await User.create(userBody);
   return user;
@@ -45,6 +49,39 @@ const getUserById = async (id) => {
  */
 const getUserByEmail = async (email) => {
   return User.findOne({ email });
+};
+
+/**
+ * Get image by user id
+ * @param {string} id
+ * @returns {Promise<User>}
+ */
+const image = async (id) => {
+  return User.findById(id);
+};
+
+/**
+ * UpdatePassword of user
+ * @param {user} user
+ * @returns {Promise<User>}
+ */
+const updatePassword = async (update) => {
+  const user = await User.findById(update.id).select('+password');
+  const result = await bcrypt.compare(update.oldPassword, user.password);
+  if (result) {
+    update.password = await bcrypt.hash(update.password, 8);
+    const data = await User.findByIdAndUpdate(user.id, update, { new: true });
+    return data;
+  }
+};
+
+/**
+ * Get user by phone
+ * @param {string} phone
+ * @returns {Promise<User>}
+ */
+const getUserByPhone = async (phone) => {
+  return User.findOne({ phone });
 };
 
 /**
@@ -84,7 +121,10 @@ module.exports = {
   createUser,
   queryUsers,
   getUserById,
+  getUserByPhone,
   getUserByEmail,
   updateUserById,
   deleteUserById,
+  image,
+  updatePassword,
 };

@@ -15,7 +15,7 @@ router.post('/confirm', submissionController.confirm);
 router.get('/list/:id/:offset', submissionController.getsubmissionsbyid);
 router.get('/listall/:id', submissionController.getlist);
 router.get('/file/:id', submissionController.file);
-router.get('/releases', submissionController.releases);
+router.get('/allreleases', submissionController.releases);
 router.post('/release', upload.single('file'), submissionController.release);
 router.get('/current', submissionController.current);
 router.get('/getimage/:id', submissionController.getImage);

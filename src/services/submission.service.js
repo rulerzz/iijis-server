@@ -92,7 +92,7 @@ const file = async (id) => {
  * Get releases
  */
 const releases = async () => {
-  return Releases.find();
+  return Releases.find().populate('submissions');
 };
 
 /**
@@ -109,7 +109,7 @@ const release = async (data, file) => {
 };
 
 const current = async () => {
-  return Releases.findOne({}, {}, { sort: { 'created_at' : -1 } }).populate('submissions');
+  return Releases.findOne().sort({createdAt: -1}).populate('submissions');
 };
 
 const image = async (id) => {

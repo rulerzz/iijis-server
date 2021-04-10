@@ -53,6 +53,7 @@ const getlist = catchAsync(async (req, res) => {
 const file = catchAsync(async (req, res) => {
   const result = await submissionService.file(req.params.id);
   res.setHeader('Content-Disposition', 'attachment; filename=' + result.file.originalname);
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.download(path.join(appDir, '../') + result.file.path, result.file.originalname);
 });
 

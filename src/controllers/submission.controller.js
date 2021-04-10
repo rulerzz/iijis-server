@@ -22,9 +22,6 @@ const document = catchAsync(async (req, res) => {
 
 const profile = catchAsync(async (req, res) => {
   const data = await submissionService.updateprofile(req.body.user, req.file);
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader('Access-Control-Allow-Methods', '*');
-  res.setHeader("Access-Control-Allow-Headers", "*");
   res.status(httpStatus.OK).send({ data });
 });
 

@@ -21,12 +21,7 @@ const document = catchAsync(async (req, res) => {
 });
 
 const profile = catchAsync(async (req, res) => {
-  console.log(req.file);
-  console.log(req.body);
   const data = await submissionService.updateprofile(req.body.user, req.file);
-  console.log(req.body);
-  console.log(req.file);
-  console.log(data);
   res.status(httpStatus.OK).send({ data });
 });
 

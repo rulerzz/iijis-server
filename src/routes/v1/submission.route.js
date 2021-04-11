@@ -2,7 +2,7 @@ const multer = require('multer');
 const express = require('express');
 const submissionController = require('../../controllers/submission.controller');
 
-const upload = multer({ dest: 'uploads' });
+const upload = multer({ dest: 'uploads/' });
 const router = express.Router();
 
 router.post('/init', submissionController.init);

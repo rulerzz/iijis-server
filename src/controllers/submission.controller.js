@@ -16,7 +16,7 @@ const incomplete = catchAsync(async (req, res) => {
 });
 
 const document = catchAsync(async (req, res) => {
-  const data = await submissionService.update(req.body.user, req.file);
+  const data = await submissionService.update(req.body.user, req.files[0]);
   res.status(httpStatus.OK).send({ data });
 });
 

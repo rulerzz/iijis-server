@@ -79,6 +79,14 @@ const getImage = catchAsync(async (req, res) => {
   res.sendFile(result.file.path, { root: path.join(appDir, '../') });
 });
 
+const getIntervieweeImage = catchAsync(async (req, res) => {
+  const result = await submissionService.image(req.params.id);
+  res.setHeader('Content-Disposition', 'attachment; filename=' + result.interviewee.originalname);
+  res.setHeader('Content-Transfer-Encoding', 'binary');
+  res.setHeader('Content-Type', 'application/octet-stream');
+  res.sendFile(result.interviewee.path, { root: path.join(appDir, '../') });
+});
+
 module.exports = {
   init,
   incomplete,
@@ -94,4 +102,5 @@ module.exports = {
   getlist,
   getImage,
   current,
+  getIntervieweeImage,
 };

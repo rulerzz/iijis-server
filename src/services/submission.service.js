@@ -104,6 +104,7 @@ const release = async (data, file) => {
     title: data.title,
     description: data.description,
     submissions: JSON.parse(data.submissions),
+    interviewee: JSON.parse(data.interviewee),
     file,
   });
 };

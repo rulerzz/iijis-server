@@ -22,6 +22,9 @@ const ReleasesSchema = mongoose.Schema(
     file: {
       type: Object,
     },
+    interviewee: {
+      type: Object,
+    },
   },
   {
     timestamps: true,

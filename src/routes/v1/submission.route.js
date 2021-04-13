@@ -32,4 +32,5 @@ router.get('/allreleases', submissionController.releases);
 router.post('/release', upload2.single('file'), submissionController.release);
 router.get('/current', submissionController.current);
 router.get('/getimage/:id', submissionController.getImage);
+router.get('/interviewee/:id', submissionController.getIntervieweeImage);
 module.exports = router;

@@ -20,7 +20,7 @@ const router = express.Router();
 
 router.post('/init', submissionController.init);
 router.get('/incomplete/:id', submissionController.incomplete);
-router.post('/document', upload.single('file'), submissionController.document);
+router.post('/document', upload2.single('file'), submissionController.document);
 router.post('/profile', upload2.single('file'), submissionController.profile);
 router.post('/uploadimage', upload2.single('file'), submissionController.uploadimage);
 router.put('/update', submissionController.update);

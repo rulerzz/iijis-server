@@ -3,16 +3,16 @@ const path = require('path');
 const express = require('express');
 const submissionController = require('../../controllers/submission.controller');
 
-const upload = multer({
-  fileFilter: function (req, file, callback) {
-      var ext = path.extname(file.originalname);
-      if(ext !== '.doc' && ext !== '.docx' && ext !== '.rtf' && ext !== '.pdf') {
-          return callback(new Error('Only selected formats are allowed'))
-      }
-      callback(null, true)
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads')
   },
-  dest: 'uploads/'
-});
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+
+const upload = multer({ storage: storage });
 
 const upload2 = multer({ dest: 'uploads/' });
 
@@ -20,7 +20,7 @@ const router = express.Router();
 
 router.post('/init', submissionController.init);
 router.get('/incomplete/:id', submissionController.incomplete);
-router.post('/document', upload2.single('file'), submissionController.document);
+router.post('/document', upload.single('file'), submissionController.document);
 router.post('/profile', upload2.single('file'), submissionController.profile);
 router.post('/uploadimage', upload2.single('file'), submissionController.uploadimage);
 router.put('/update', submissionController.update);

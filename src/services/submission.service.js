@@ -22,7 +22,7 @@ const incomplete = async (id) => {
  * Update File Info
  */
 const update = async (id, file) => {
-  const data = Submission.findByIdAndUpdate(id, { file }, { new: true });
+  const data = await Submission.findByIdAndUpdate(id, { file }, { new: true });
   return data;
 };
 

@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 const submissionController = require('../../controllers/submission.controller');
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: 'uploads/', storage: multer.memoryStorage() });
 
 const router = express.Router();
 

@@ -16,19 +16,17 @@ const incomplete = catchAsync(async (req, res) => {
 });
 
 const document = catchAsync(async (req, res) => {
-  const data = await submissionService.update(req.body.user, req.files.file);
-  uploadPath = appDir + '/uploads/' + req.files.file.name;
-  req.files.file.mv(uploadPath);
+  const data = await submissionService.update(req.body.user, req.file);
   res.status(httpStatus.OK).send({ data });
 });
 
 const profile = catchAsync(async (req, res) => {
-  const data = await submissionService.updateprofile(req.body.user, req.files.file);
+  const data = await submissionService.updateprofile(req.body.user, req.file);
   res.status(httpStatus.OK).send({ data });
 });
 
 const uploadimage = catchAsync(async (req, res) => {
-  const data = await submissionService.uploadimage(req.files.file);
+  const data = await submissionService.uploadimage(req.file);
   res.status(httpStatus.OK).send({ data });
 });
 
@@ -64,7 +62,7 @@ const releases = catchAsync(async (req, res) => {
 });
 
 const release = catchAsync(async (req, res) => {
-  const data = await submissionService.release(req.body, req.files.file);
+  const data = await submissionService.release(req.body, req.file);
   res.status(httpStatus.OK).send({ data });
 });
 

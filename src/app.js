@@ -3,7 +3,6 @@ const helmet = require('helmet');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const compression = require('compression');
-const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const passport = require('passport');
 const httpStatus = require('http-status');
@@ -25,8 +24,6 @@ if (config.env !== 'test') {
 // set security HTTP headers
 app.use(helmet());
 
-app.use(fileUpload());
-
 // parse json request body
 app.use(express.json());
 
@@ -42,7 +39,7 @@ app.use(compression());
 
 // enable cors
 app.use(cors());
-app.options('POST', cors());
+app.options('*', cors());
 
 // jwt authentication
 app.use(passport.initialize());

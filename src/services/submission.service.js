@@ -103,6 +103,7 @@ const release = async (data, file) => {
   return Releases.create({
     title: data.title,
     description: data.description,
+    intervieweename: data.intervieweename,
     submissions: JSON.parse(data.submissions),
     interviewee: JSON.parse(data.interviewee),
     file,
